@@ -11,11 +11,17 @@ AnimatedSprite::AnimatedSprite(Graphics &graphics, const std::string &spritePath
 
 AnimatedSprite::~AnimatedSprite() = default;
 
-void AnimatedSprite::addAnimation(std::string name, int x, int y, int height, int width, int frames) {
+void
+AnimatedSprite::addAnimation(std::string name, int firstFrameX, int firstFrameY, int frameWidth, int frameHeight, int framesAmount,
+                             int animationSpeed) {
     std::vector<SDL_Rect> rectangles;
-    for (int i = 0; i < frames; ++i) {
-        SDL_Rect newRect = {i * width + x, y, width, height};
-        rectangles.push_back(std::move(newRect));
+
+    // first rect with animation info. x contains frame time to update
+    SDL_Rect info = {animationSpeed, 0, 0, 0};
+    rectangles.push_back(info);
+    for (int i = 0; i <= framesAmount; ++i) {
+        SDL_Rect newRect = {i * frameWidth + firstFrameX, firstFrameY, frameWidth, frameHeight};
+        rectangles.push_back(newRect);
     }
     this->animations.insert(std::pair<std::string, std::vector<SDL_Rect>>(name, rectangles));
 }
@@ -24,16 +30,17 @@ void AnimatedSprite::playAnimation(const std::string &animation) {
     if (this->currentAnimation != animation) {
         this->currentAnimation = animation;
         this->frameIndex = 0;
+        this->frameTimeToUpdate = this->animations[this->currentAnimation][0].x;
     }
 }
 
 void AnimatedSprite::update(int elapsedTime) {
     this->frameTime += elapsedTime;
     if (this->frameTime > this->frameTimeToUpdate) {
-        if (this->frameIndex < this->animations[this->currentAnimation].size() - 1) {
+        if (this->frameIndex < this->animations[this->currentAnimation].size() - 2) {
             this->frameIndex++;
         } else {
-            this->frameIndex = 0;
+            this->frameIndex = 1;
         }
         this->sourceRect = this->animations[this->currentAnimation][this->frameIndex];
         this->frameTime -= this->frameTimeToUpdate;

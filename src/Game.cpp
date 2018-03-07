@@ -1,10 +1,10 @@
 #include <SDL.h>
-#include <Sprite.h>
 
 #include "Game.h"
 #include "Input.h"
 #include "Graphics.h"
 #include "Scroll.h"
+#include "Player.h"
 
 namespace {
     const int FPS = 50;
@@ -29,8 +29,8 @@ void Game::mainLoop() {
     Scroll scroll;
     Input input;
 
-    this->sprite = new AnimatedSprite(graphics, "../content/sprites/anhero.png", 50, 50);
-    this->sprite->playAnimation("Idle");
+    this->player = new Player(graphics, 50, 50);
+    this->player->playAnimation("Run");
 
     int lastUpdateTime = SDL_GetTicks();
 
@@ -39,6 +39,11 @@ void Game::mainLoop() {
         input.beginNewFrame(event);
 
         // Handle input, may be add Controls class later
+        if (input.isKeyHeld(SDL_SCANCODE_A)) {
+            this->player->walk(-0.005);
+        } else if (input.isKeyHeld(SDL_SCANCODE_D)) {
+            this->player->walk(0.005);
+        }
         if (input.wasKeyPressed(SDL_SCANCODE_ESCAPE)) {
             return;
         }
@@ -56,7 +61,7 @@ void Game::update(Graphics &graphics, Input &input, Scroll &scroll, int elapsedT
 
     scroll.update(graphics, input);
 
-    this->sprite->update(elapsedTime);
+    this->player->update(elapsedTime);
 
     if (timeAfterUpdate > FRAME_TIME) {
         this->draw(graphics, scroll);
@@ -67,7 +72,7 @@ void Game::update(Graphics &graphics, Input &input, Scroll &scroll, int elapsedT
 void Game::draw(Graphics &graphics, Scroll &scroll) {
     graphics.clear();
 
-    this->sprite->draw(graphics);
+    this->player->draw(graphics);
 
     graphics.flip();
 }

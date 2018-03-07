@@ -10,7 +10,7 @@ link_directories(SDL2/lib SDL2_image/lib)
 set(SOURCE_FILES
         main.cpp headers/Game.h src/Game.cpp headers/globals.h src/globals.cpp headers/Graphics.h src/Graphics.cpp
         headers/Input.h src/Input.cpp headers/Scroll.h src/Scroll.cpp
-        headers/Player.h headers/Sprite.h headers/AnimatedSprite.h headers/Movable.h src/Sprite.cpp src/AnimatedSprite.cpp)
+        headers/Player.h headers/Sprite.h headers/AnimatedSprite.h headers/Movable.h src/Sprite.cpp src/AnimatedSprite.cpp src/Player.cpp src/Movable.cpp)
 
 add_executable(APerfectGame ${SOURCE_FILES})
 

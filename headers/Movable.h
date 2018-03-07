@@ -1,8 +1,14 @@
 #ifndef MOVABLE_H
 #define MOVABLE_H
 
+#include "globals.h"
+
 class Movable {
-    double deltaX, deltaY;
+public:
+    Movable();
+
+protected:
+    pointDouble delta;
 };
 
 #endif // MOVABLE_H

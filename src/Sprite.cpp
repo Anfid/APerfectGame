@@ -1,8 +1,8 @@
 #include "Sprite.h"
 
+#include <cmath>
 #include "SDL.h"
 
-#include "globals.h"
 #include "Graphics.h"
 
 Sprite::Sprite(Graphics &graphics, const std::string &spritePath, int positionX, int positionY) :
@@ -23,7 +23,7 @@ Sprite::~Sprite() {
 }
 
 void Sprite::draw(Graphics &graphics) {
-    SDL_Rect destRect{position.x, position.y, (int)(this->sourceRect.w * globals::spriteScale),
+    SDL_Rect destRect{std::lround(position.x), std::lround(position.y), (int)(this->sourceRect.w * globals::spriteScale),
                       (int)(this->sourceRect.h * globals::spriteScale)};
     graphics.blitSurface(*this->spriteSheet, this->sourceRect, destRect);
 }

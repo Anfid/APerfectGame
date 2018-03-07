@@ -4,6 +4,8 @@
 #include <string>
 #include <SDL_rect.h>
 
+#include "globals.h"
+
 struct SDL_Texture;
 class Graphics;
 
@@ -19,7 +21,7 @@ protected:
     SDL_Texture *spriteSheet;
     SDL_Rect sourceRect;
 
-    SDL_Point position;
+    pointDouble position;
 };
 
 #endif // SPRITE_H
