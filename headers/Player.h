@@ -8,9 +8,10 @@
 class Player : public AnimatedSprite, private Movable  {
 public:
     Player(Graphics &graphics, int positionX, int positionY);
-    void walk(double x);
+    void walk(Direction direction);
 
     void update(int elapsedTime) override;
+    void draw(Graphics &graphics) override;
 
 protected:
     Direction direction;

@@ -1,5 +1,7 @@
 #include "Player.h"
 
+#include "Graphics.h"
+
 Player::Player(Graphics &graphics, int positionX, int positionY) :
         AnimatedSprite(graphics, "../content/sprites/anhero.png", positionX, positionY),
         Movable(),
@@ -11,13 +13,17 @@ Player::Player(Graphics &graphics, int positionX, int positionY) :
     this->currentAnimation = "Idle";
 }
 
-void Player::walk(double x) {
-    if (x < 0) {
-        this->direction = left;
-        this->delta.x = -this->moveSpeed; // todo later: add buffs and debuffs affecting player
-    } else if (x > 0) {
-        this->direction = right;
-        this->delta.x = this->moveSpeed;
+void Player::walk(Direction direction) {
+    this->direction = direction;
+    this->playAnimation("Run");
+    switch(direction) {
+        case left:
+            this->moveX(-this->moveSpeed); // todo later: add buffs and debuffs affecting player
+            break;
+
+        case right:
+            this->moveX(this->moveSpeed);
+            break;
     }
 }
 
@@ -26,8 +32,18 @@ void Player::update(int elapsedTime) {
     static int timeAfterUpdate;
     timeAfterUpdate += elapsedTime;
     if (timeAfterUpdate > 20) {
-        this->position.x += this->delta.x;
-        this->delta.x = 0;
+        if (this->delta.x == 0) {
+            this->playAnimation("Idle");
+        } else {
+            this->position.x += this->delta.x;
+            this->delta.x = 0;
+        }
         timeAfterUpdate = 0;
     }
+}
+
+void Player::draw(Graphics &graphics) {
+    SDL_Rect destRect{std::lround(position.x), std::lround(position.y), (int)(this->sourceRect.w * globals::spriteScale),
+                      (int)(this->sourceRect.h * globals::spriteScale)};
+    graphics.blitSurface(*this->spriteSheet, this->sourceRect, destRect, this->direction == left);
 }

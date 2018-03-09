@@ -14,11 +14,10 @@ public:
     void playAnimation(const std::string &animationName);
 
     virtual void update(int elapsedTime);
-    void draw(Graphics &graphics) override;
 
 protected:
-    void addAnimation(std::string name, int firstFrameX, int firstFrameY, int frameWidth, int frameHeight, int framesAmount,
-                          int animationSpeed);
+    void addAnimation(std::string name, int firstFrameX, int firstFrameY, int frameWidth, int frameHeight,
+                      int framesAmount, int animationSpeed);
 
     std::string currentAnimation;
     int frameIndex;

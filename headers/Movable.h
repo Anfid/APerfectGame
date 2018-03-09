@@ -6,6 +6,8 @@
 class Movable {
 public:
     Movable();
+    void moveX(double x);
+    void moveY(double y);
 
 protected:
     pointDouble delta;

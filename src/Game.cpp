@@ -4,7 +4,6 @@
 #include "Input.h"
 #include "Graphics.h"
 #include "Scroll.h"
-#include "Player.h"
 
 namespace {
     const int FPS = 50;
@@ -40,9 +39,9 @@ void Game::mainLoop() {
 
         // Handle input, may be add Controls class later
         if (input.isKeyHeld(SDL_SCANCODE_A)) {
-            this->player->walk(-0.005);
+            this->player->walk(left);
         } else if (input.isKeyHeld(SDL_SCANCODE_D)) {
-            this->player->walk(0.005);
+            this->player->walk(right);
         }
         if (input.wasKeyPressed(SDL_SCANCODE_ESCAPE)) {
             return;

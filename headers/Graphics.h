@@ -34,7 +34,7 @@ public:
     /* void blitSurface(...)
      * Draws a texture to a certain part of the screen
      */
-    void blitSurface(SDL_Texture &source, SDL_Rect &sourceRect, SDL_Rect &destRect);
+    void blitSurface(SDL_Texture &source, SDL_Rect &sourceRect, SDL_Rect &destRect, bool mirrored = false);
 
     /* void flip()
      * Renders everything to the screen

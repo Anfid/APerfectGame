@@ -25,8 +25,12 @@ SDL_Texture* Graphics::createTexture(const std::string &filepath) {
     return SDL_CreateTextureFromSurface(this->renderer, this->loadImage(filepath));
 }
 
-void Graphics::blitSurface(SDL_Texture &source, SDL_Rect &sourceRect, SDL_Rect &destRect) {
-    SDL_RenderCopy(this->renderer, &source, &sourceRect, &destRect);
+void Graphics::blitSurface(SDL_Texture &source, SDL_Rect &sourceRect, SDL_Rect &destRect, bool mirrored) {
+    if (mirrored) {
+        SDL_RenderCopyEx(this->renderer, &source, &sourceRect, &destRect, NULL, nullptr, SDL_FLIP_HORIZONTAL);
+    } else {
+        SDL_RenderCopy(this->renderer, &source, &sourceRect, &destRect);
+    }
 }
 
 void Graphics::flip() {

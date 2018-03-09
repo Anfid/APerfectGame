@@ -11,9 +11,8 @@ AnimatedSprite::AnimatedSprite(Graphics &graphics, const std::string &spritePath
 
 AnimatedSprite::~AnimatedSprite() = default;
 
-void
-AnimatedSprite::addAnimation(std::string name, int firstFrameX, int firstFrameY, int frameWidth, int frameHeight, int framesAmount,
-                             int animationSpeed) {
+void AnimatedSprite::addAnimation(std::string name, int firstFrameX, int firstFrameY, int frameWidth, int frameHeight,
+                                  int framesAmount, int animationSpeed) {
     std::vector<SDL_Rect> rectangles;
 
     // first rect with animation info. x contains frame time to update
@@ -45,8 +44,4 @@ void AnimatedSprite::update(int elapsedTime) {
         this->sourceRect = this->animations[this->currentAnimation][this->frameIndex];
         this->frameTime -= this->frameTimeToUpdate;
     }
-}
-
-void AnimatedSprite::draw(Graphics &graphics) {
-    Sprite::draw(graphics);
 }
