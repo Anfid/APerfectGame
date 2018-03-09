@@ -18,13 +18,17 @@ void Player::walk(Direction direction) {
     this->playAnimation("Run");
     switch(direction) {
         case left:
-            this->moveX(-this->moveSpeed); // todo later: add buffs and debuffs affecting player
+            this->setVector(-this->moveSpeed, 0); // todo later: add buffs and debuffs affecting player
             break;
 
         case right:
-            this->moveX(this->moveSpeed);
+            this->setVector(this->moveSpeed, 0);
             break;
     }
+}
+
+void Player::stop() {
+    Movable::stop();
 }
 
 void Player::update(int elapsedTime) {
@@ -32,18 +36,18 @@ void Player::update(int elapsedTime) {
     static int timeAfterUpdate;
     timeAfterUpdate += elapsedTime;
     if (timeAfterUpdate > 20) {
-        if (this->delta.x == 0) {
+        if (this->getVector().x == 0) {
             this->playAnimation("Idle");
         } else {
-            this->position.x += this->delta.x;
-            this->delta.x = 0;
+            this->position.x += this->getVector().x;
         }
         timeAfterUpdate = 0;
     }
 }
 
 void Player::draw(Graphics &graphics) {
-    SDL_Rect destRect{std::lround(position.x), std::lround(position.y), (int)(this->sourceRect.w * globals::spriteScale),
+    SDL_Rect destRect{std::lround(this->position.x), std::lround(this->position.y),
+                      (int)(this->sourceRect.w * globals::spriteScale),
                       (int)(this->sourceRect.h * globals::spriteScale)};
     graphics.blitSurface(*this->spriteSheet, this->sourceRect, destRect, this->direction == left);
 }

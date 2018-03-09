@@ -38,10 +38,14 @@ void Game::mainLoop() {
         input.beginNewFrame(event);
 
         // Handle input, may be add Controls class later
-        if (input.isKeyHeld(SDL_SCANCODE_A)) {
-            this->player->walk(left);
-        } else if (input.isKeyHeld(SDL_SCANCODE_D)) {
-            this->player->walk(right);
+        if (input.isKeyHeld(SDL_SCANCODE_A) xor input.isKeyHeld(SDL_SCANCODE_D)) {
+            if (input.isKeyHeld(SDL_SCANCODE_A)) {
+                this->player->walk(left);
+            } else if (input.isKeyHeld(SDL_SCANCODE_D)) {
+                this->player->walk(right);
+            }
+        } else {
+            this->player->stop();
         }
         if (input.wasKeyPressed(SDL_SCANCODE_ESCAPE)) {
             return;

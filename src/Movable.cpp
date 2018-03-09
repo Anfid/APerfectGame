@@ -1,13 +1,24 @@
 #include "Movable.h"
 
 Movable::Movable() :
-        delta{0, 0}
+        vector{0, 0}
 {}
 
-void Movable::moveX(double x) {
-    this->delta.x = x;
+void Movable::accelerate(double x, double y) {
+    if (x) this->vector.x += x;
+    if (y) this->vector.y += y;
 }
 
-void Movable::moveY(double y) {
+void Movable::setVector(double x, double y) {
+    if (x) this->vector.x = x;
+    if (y) this->vector.y = y;
+}
 
+void Movable::stop(bool x, bool y) {
+    if (x) this->vector.x = 0;
+    if (y) this->vector.y = 0;
+}
+
+const pointDouble& Movable::getVector() {
+    return this->vector;
 }
