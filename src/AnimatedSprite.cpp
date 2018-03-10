@@ -26,10 +26,10 @@ void AnimatedSprite::addAnimation(std::string name, int firstFrameX, int firstFr
 }
 
 void AnimatedSprite::playAnimation(const std::string &animation) {
+    this->frameTimeToUpdate = this->animations[this->currentAnimation][0].x;
     if (this->currentAnimation != animation) {
         this->currentAnimation = animation;
         this->frameIndex = 0;
-        this->frameTimeToUpdate = this->animations[this->currentAnimation][0].x;
     }
 }
 

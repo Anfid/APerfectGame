@@ -15,7 +15,10 @@ public:
     void draw(Graphics &graphics) override;
 
 protected:
+    void updateAnimations();
+
     Direction direction;
+    bool grounded;
     double moveSpeed;
 };
 
