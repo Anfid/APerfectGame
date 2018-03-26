@@ -1,8 +1,9 @@
 #include "Player.h"
 
+#include <cmath>
 #include "Graphics.h"
 
-Player::Player(Graphics &graphics, int positionX, int positionY) :
+Player::Player(Graphics &graphics, double positionX, double positionY) :
         AnimatedSprite(graphics, "../content/sprites/anhero.png", positionX, positionY),
         Movable(),
         direction(right),

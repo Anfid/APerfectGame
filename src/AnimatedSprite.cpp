@@ -2,7 +2,7 @@
 
 #include "Graphics.h"
 
-AnimatedSprite::AnimatedSprite(Graphics &graphics, const std::string &spritePath, int positionX, int positionY) :
+AnimatedSprite::AnimatedSprite(Graphics &graphics, const std::string &spritePath, double positionX, double positionY) :
         Sprite(graphics, spritePath, positionX, positionY),
         frameIndex(0),
         frameTime(0),

@@ -11,8 +11,8 @@ class Graphics;
 
 class Sprite {
 public:
-    Sprite(Graphics &graphics, const std::string &spritePath, int positionX, int positionY);
-    Sprite(Graphics &graphics, const std::string &spritePath, int sourceX, int sourceY, int sourceW, int sourceH, int positionX, int positionY);
+    Sprite(Graphics &graphics, const std::string &spritePath, double positionX, double positionY);
+    Sprite(Graphics &graphics, const std::string &spritePath, int sourceX, int sourceY, int sourceW, int sourceH, double positionX, double positionY);
     virtual ~Sprite();
 
     virtual void draw(Graphics &graphics);
