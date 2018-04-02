@@ -18,13 +18,17 @@ public:
 protected:
     void addAnimation(std::string name, int firstFrameX, int firstFrameY, int frameWidth, int frameHeight,
                       int framesAmount, int animationSpeed);
+    void nextFrame();
 
     std::string currentAnimation;
     int frameIndex;
     int frameTime;
     int frameTimeToUpdate;
 
-    std::map<std::string, std::vector<SDL_Rect>> animations;
+    struct AnimationInfo {
+        int speed;
+    };
+    std::map<std::string, std::pair<AnimationInfo, std::vector<SDL_Rect>>> animations;
 };
 
 #endif // ANIMATEDSPRITE_H

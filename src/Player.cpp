@@ -37,7 +37,7 @@ void Player::updateAnimations() {
             this->playAnimation("Idle");
         } else {
             this->playAnimation("Run");
-            this->animations["Run"][0].x = (int)(250 / this->moveSpeed);
+            this->animations["Run"].first.speed = (int)(250 / this->moveSpeed);
         }
     }
 }
