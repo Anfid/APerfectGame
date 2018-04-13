@@ -8,7 +8,7 @@
 
 class AnimatedSprite : public Sprite {
 public:
-    AnimatedSprite(Graphics &graphics, const std::string &spritePath, int positionX, int positionY);
+    AnimatedSprite(Graphics &graphics, const std::string &spritePath, double positionX, double positionY);
     ~AnimatedSprite() override;
 
     void playAnimation(const std::string &animationName);

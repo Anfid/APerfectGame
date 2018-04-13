@@ -7,7 +7,7 @@
 
 class Player : public AnimatedSprite, private Movable  {
 public:
-    Player(Graphics &graphics, int positionX, int positionY);
+    Player(Graphics &graphics, double positionX, double positionY);
     void walk(Direction direction);
     void stop();
 
